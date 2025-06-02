@@ -66,6 +66,7 @@ function collectVotesFromResult(result) {
 app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/views'));
+app.use('/media', express.static(__dirname + '/media'));
 
 app.get('/', function (req, res) {
   res.sendFile(path.resolve(__dirname + '/views/index.html'));

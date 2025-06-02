@@ -51,9 +51,9 @@ body{
   position: absolute;
   bottom: 40px;
   right: 20px;
-  color: #fff;
-  opacity: 0.5;
-  font-size: 45px;
+  color: #ff0000;
+  opacity: 0.8;
+  font-size: 55px;
   font-weight: 600;
 }
 #choice{
@@ -103,10 +103,22 @@ body{
   width:100%;
   position:absolute;
 }
-#background-stats div{
+#background-stats div {
   transition: width 400ms ease-in-out;
-  display:inline-block;
-  margin-bottom:-4px;
-  width:50%;
-  height:100%;
+  display: inline-block;
+  margin-bottom: -4px;
+  width: 50%;
+  height: 100%;
+  background-image: url("/media/catvsdog.jpg");
+  background-size: 140% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#background-stats div:first-child {
+  background-position: left center;
+}
+
+#background-stats div:last-child {
+  background-position: right center;
 }

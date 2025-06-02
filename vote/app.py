@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, g
+from flask import Flask, render_template, request, make_response, g, send_from_directory
 from redis import Redis
 import os
 import socket
@@ -15,6 +15,15 @@ app = Flask(__name__)
 gunicorn_error_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers.extend(gunicorn_error_logger.handlers)
 app.logger.setLevel(logging.INFO)
+
+# Konfiguracja serwowania plików statycznych
+app.static_folder = 'static'
+app.static_url_path = '/static'
+
+# Dodajemy specjalną regułę dla plików z katalogu media
+@app.route('/media/<path:filename>')
+def serve_media(filename):
+    return send_from_directory('/usr/local/app/media', filename)
 
 def get_redis():
     if not hasattr(g, 'redis'):

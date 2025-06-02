@@ -18,6 +18,7 @@ services:
       start_period: 10s
     volumes:
      - ./vote:/usr/local/app
+     - ./media:/usr/local/app/static/media
     ports:
       - "8080:80"
     networks:
@@ -33,6 +34,7 @@ services:
         condition: service_healthy 
     volumes:
       - ./result:/usr/local/app
+      - ./media:/usr/local/app/media
     ports:
       - "8081:80"
       - "127.0.0.1:9229:9229"
