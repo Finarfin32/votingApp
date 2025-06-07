@@ -5,18 +5,28 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends curl tini && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/local/app
+WORKDIR /app
 
 # have nodemon available for local dev use (file watching)
 RUN npm install -g nodemon
 
+# Kopiujemy package.json i package-lock.json najpierw
 COPY package*.json ./
 
-RUN npm ci && \
- npm cache clean --force && \
- mv /usr/local/app/node_modules /node_modules
+# Instalujemy zależności z pełnym logowaniem
+RUN npm install --verbose
 
+# Kopiujemy resztę plików
 COPY . .
+
+# Kopiujemy plik obrazu
+COPY ../media/catvsdog.jpg ./media/
+
+# Dodajemy logi podczas budowania
+RUN echo "Building application..." && \
+    ls -la && \
+    echo "Node version: $(node -v)" && \
+    echo "NPM version: $(npm -v)"
 
 ENV PORT=80
 EXPOSE 80
